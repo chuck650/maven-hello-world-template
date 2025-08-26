@@ -1,0 +1,9 @@
+{
+  "recommendations": [
+    "vscjava.vscode-java-pack",
+    "vscjava.vscode-maven",
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint",
+    "redhat.vscode-yaml"
+  ]
+}
