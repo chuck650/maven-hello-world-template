@@ -2,10 +2,11 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.example.helloworld</groupId>
+  <groupId>edu.pstcc.citc.App</groupId>
   <artifactId>hello-world</artifactId>
   <version>1.0-SNAPSHOT</version>
   <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>21</maven.compiler.source>
     <maven.compiler.target>21</maven.compiler.target>
   </properties>
@@ -49,6 +50,59 @@
             </jdk>
           </toolchains>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.2.2</version>
+        <configuration>
+          <outputDirectory>${project.basedir}/dist</outputDirectory>
+          <archive>
+            <manifest>
+              <mainClass>edu.pstcc.citc.App</mainClass>
+            </manifest>
+          </archive>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>3.2.0</version> <!-- Check for the latest stable version if needed -->
+        <configuration>
+          <!-- 
+            SET YOUR FULLY QUALIFIED MAIN CLASS HERE 
+            (e.g., edu.pstcc.citc.App or com.example.DataViewer) 
+          -->
+          <mainClass>edu.pstcc.citc.App</mainClass>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.6.3</version> <!-- Use the latest version -->
+        <configuration>
+          <show>public</show>
+          <nohelp>true</nohelp>
+          <outputDirectory>${project.basedir}/docs/apidocs</outputDirectory>
+        </configuration>
+        <executions>
+          <execution>
+            <id>attach-javadocs</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+            <configuration>
+              <jarOutputDirectory>${project.basedir}/dist</jarOutputDirectory>
+            </configuration>
+          </execution>
+          <execution>
+            <id>generate-docs-apidocs</id>
+            <phase>package</phase>
+            <goals>
+              <goal>javadoc</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>

@@ -54,7 +54,7 @@ mvn compile
 ### Run the Application
 
 ```bash
-mvn exec:java -Dexec.mainClass="com.example.helloworld.App"
+mvn exec:java -Dexec.mainClass="edu.pstcc.chnelson.helloworld.App"
 ```
 
 ### Run Tests
@@ -114,4 +114,34 @@ target/
 # OS-specific files
 .DS_Store
 Thumbs.db
+```
+## Running with Maven
+
+To avoid having to specify the main class entry point each time, configure Maven's pom.xml and set the entrypoint for the exec plugin by adding this to the plugins section.
+
+```xml
+<plugin>
+  <groupId>org.codehaus.mojo</groupId>
+  <artifactId>exec-maven-plugin</artifactId>
+  <version>3.2.0</version> <!-- Check for the latest stable version if needed -->
+  <configuration>
+    <!-- 
+      SET YOUR FULLY QUALIFIED MAIN CLASS HERE 
+      (e.g., edu.pstcc.citc.App or com.example.DataViewer) 
+    -->
+    <mainClass>edu.pstcc.citc.App</mainClass>
+  </configuration>
+</plugin>
+```
+
+Otherwise, you will have to specify it each time you execute the application with maven like this.
+
+```sh
+mvn exec:java -Dexec.mainClass="edu.pstcc.citc.App"
+```
+
+## Running directly with java
+
+```sh
+java -cp target/classes edu.pstcc.citc.App
 ```
