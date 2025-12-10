@@ -1,6 +1,6 @@
 # Maven Hello World Template
 
-[![Java CI](https://github.com/chuck650/maven-hello-world-template/actions/workflowsjava-ci.yml)
+[![Java CI](https://github.com/chuck650/maven-hello-world-template/actions/workflows/java-ci.yml/badge.svg?branch=main)](https://github.com/chuck650/maven-hello-world-template/actions/workflows/java-ci.yml)
 
 This is a simple Maven-based Java project designed for use as a GitHub Classroom template. It includes a basic "Hello World" application, Javadoc comments, and is compatible with Visual Studio Code.
 
