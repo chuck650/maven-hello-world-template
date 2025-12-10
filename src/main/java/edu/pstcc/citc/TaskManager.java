@@ -11,9 +11,15 @@ public class TaskManager {
   private Long nextTaskId = 1L;
 
   /**
+   * The default constructor
+   */
+  public TaskManager() {}
+  /**
    * Adds a new task to the task store.
    * 
-   * @param task The task to be added.
+   * @param task The task to be added to the collection
+   * @return The Task that was added to the collection
+   * @throws DuplicateTaskException If a duplicate is found when adding the task to the collection
    */
   public Task addTask(Task task) throws DuplicateTaskException {
     // Validate the input before processing it
@@ -55,7 +61,8 @@ public class TaskManager {
    * Find the existing task in taskStore with the same ID as
    * updatedTask and replace it updatedTask.
    * 
-   * @param updatedTask
+   * @param updatedTask The task to replace the exisitng class
+   * @throws TaskNotFoundException If the task is not found the collection
    */
   public void updateTask(Task updatedTask) throws TaskNotFoundException {
     // Update the task in the store
@@ -72,7 +79,8 @@ public class TaskManager {
   /**
    * Deletes the task with the given ID from the store.
    * 
-   * @param taskId
+   * @param taskId The task ID to find in the collection
+   * @throws TaskNotFoundException If the task is not found the collection
    */
   public void deleteTask(Long taskId) throws TaskNotFoundException {
     // If key not found, throw exception
@@ -101,9 +109,9 @@ public class TaskManager {
 
   /**
    * Gets the task with the given ID.  
-   * @param taskId
-   * @return
-   * @throws TaskNotFoundException
+   * @param taskId The task ID to find in the collection
+   * @return the task that was found in the collection
+   * @throws TaskNotFoundException If the task ID is not found in the collection
    */
   public Task getTask(Long taskId) throws TaskNotFoundException {
     // If key not found, throw exception

@@ -4,6 +4,12 @@ package edu.pstcc.citc;
  * A Testing Application for Task Manager and associated classes
  */
 public class App {
+
+    /**
+     * The default constructor for the Application
+     */
+    public App() {}
+    
     /**
      * Main method that prints Hello World.
      *

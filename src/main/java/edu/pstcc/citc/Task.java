@@ -3,7 +3,12 @@ package edu.pstcc.citc;
 import java.time.LocalDateTime;
 
 /**
- * Represents a task with various attributes and behaviors.
+ * Represents a task with various private attributes, public getter/setter methods,
+ * and behaviors. Used to manage tasks in a system.  Can be used standalone or stored 
+ * with other tasks in a collection within a TaskManager.
+ * 
+ * @author Chuck Nelson
+ * @since 1.0
  */
 public class Task {
     // Fields based on the UML diagram
@@ -17,15 +22,19 @@ public class Task {
     private LocalDateTime completedDate;
 
     // Constructors
+
+    /**
+     * Default constructor
+     */
     public Task() {
-        // Default constructor
+        //  Default constructor
     }
 
     /**
      * Parameterized constructor
      * 
-     * @param title
-     * @param description
+     * @param title This is the title of the task.
+     * @param description This is the description of the task.
      */
     public Task(String title, String description) {
         this.title = title;
@@ -39,7 +48,7 @@ public class Task {
     /**
      * Sets the ID of the task.
      * 
-     * @param id
+     * @param id The unique ID of the task.
      */
     public void setId(Long id) {
         if (id.longValue() <= 0) {
@@ -60,7 +69,7 @@ public class Task {
     /**
      * Gets the title of the task.
      * 
-     * @return
+     * @return String
      */
     public String getTitle() {
         return this.title;
@@ -69,7 +78,7 @@ public class Task {
     /**
      * Sets the title of the task.
      * 
-     * @param title
+     * @param title The unique Title of the task.  Must not be null nor duplicate any other task Title or an IllegalArgumentException will be thrown.
      */
     public void setTitle(String title) {
         if (title == null || title.trim().isEmpty()) {
@@ -90,7 +99,7 @@ public class Task {
     /**
      * Sets the description of the task.
      * 
-     * @param description
+     * @param description The short description of the task.
      */
     public void setDescription(String description) {
         this.description = description;
@@ -98,7 +107,7 @@ public class Task {
 
     /**
      * Gets the status of the task.
-     * @return TaskStatus
+     * @return An enum value of type TaskStatus
      */
     public TaskStatus getStatus() {
         return this.status;
@@ -106,7 +115,7 @@ public class Task {
 
     /**
      * Sets the status of the task.
-     * @param status
+     * @param status One of the allowable task Status codes from TaskStatus
      */
     public void setStatus(TaskStatus status) {
         this.status = status;
@@ -114,7 +123,7 @@ public class Task {
 
     /**
      * Gets the priority of the task.
-     * @return Priority
+     * @return An enum value of type Priority
      */
     public Priority getPriority() {
         return this.priority;
@@ -122,7 +131,7 @@ public class Task {
 
     /**
      * Sets the priority of the task.
-     * @param priority
+     * @param priority One of the allowable priority codes from Priority
      */
     public void setPriority(Priority priority) {
         this.priority = priority;
@@ -130,7 +139,7 @@ public class Task {
 
     /**
      * Gets the created date of the task.
-     * @return LocalDateTime
+     * @return The created date as a LocalDateTime object.
      */
     public LocalDateTime getCreatedDate() {
         return this.createdDate;
@@ -138,15 +147,19 @@ public class Task {
 
     /**
      * Sets the created date of the task.
-     * @param date
+     * @param date Any valid date earlier than now as a LocalDateTime
      */
     public void setCreatedDate(LocalDateTime date) {
+        // Don't allow null nor future created dates
+        if (date == null || date.isAfter(LocalDateTime.now())){
+            throw new IllegalArgumentException("Invalid Task CreatedDate:" + date);
+        }
         this.createdDate = date;
     }
 
     /**
      * Gets the due date of the task.
-     * @return LocalDateTime
+     * @return The due date as a LocalDateTime object.
      */
     public LocalDateTime getDueDate() {
         return this.dueDate;
@@ -154,7 +167,7 @@ public class Task {
 
     /**
      * Sets the due date of the task.
-     * @param date
+     * @param date Any valid date or null to clear
      */
     public void setDueDate(LocalDateTime date) {
         this.dueDate = date;
@@ -162,7 +175,7 @@ public class Task {
 
     /**
      * Gets the completed date of the task.
-     * @return LocalDateTime
+     * @return The completed date as a LocalDateTime object, or null if the task is not completed.
      */
     public LocalDateTime getCompletedDate() {
         return this.completedDate;
@@ -170,9 +183,13 @@ public class Task {
 
     /**
      * Sets the completed date of the task.
-     * @param date
+     * @param date Any valid date earlier than now as a LocalDateTime
      */
     public void setCompletedDate(LocalDateTime date) {
+        // Don't allow completion dates in the future, but do allow nullifying the completion date
+        if (date != null && date.isAfter(LocalDateTime.now())){
+            throw new IllegalArgumentException("Invalid Task CreatedDate:" + date);
+        }
         this.completedDate = date;
     }
 
@@ -180,10 +197,19 @@ public class Task {
 
     /**
      * Checks if the task is overdue.
-     * @return boolean
+     * @return The result of the check as a boolean
      */
     public boolean isOverdue() {
-        return this.dueDate.isBefore(LocalDateTime.now()) && !this.completedDate.equals(this.dueDate);
+        // If there is no due date, then it can't be overdue
+        if (this.dueDate == null){
+            return false;
+        }
+        // If there is a completion date, then it can't be overdue
+        if (this.completedDate != null){
+            return false;
+        }
+        // else, check if today is past the due date
+        return this.dueDate.isBefore(LocalDateTime.now());
     }
 
     /**
