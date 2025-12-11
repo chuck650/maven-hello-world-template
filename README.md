@@ -4,36 +4,22 @@
 
 This is a simple Maven-based Java project designed for use as a GitHub Classroom template. It includes a basic "Hello World" application, Javadoc comments, and is compatible with Visual Studio Code.
 
+For details on project configuration and Maven setup, see [CONFIG.md](CONFIG.md).
+
 ## 📦 Project Structure
 
-.
-├── hello-world.code-workspace
-├── pom.xml
-├── README.md
-├── src
-│   ├── main
-│   │   └── java
-│   │       └── com
-│   │           └── example
-│   │               └── helloworld
-│   │                   └── App.java
-│   └── test
-│       └── java
-│           └── com
-│               └── example
-│                   └── helloworld
-│                       └── AppTest.java
-└── target
-    ├── classes
-    │   └── com
-    │       └── example
-    │           └── helloworld
-    │               └── App.class
-    └── test-classes
-        └── com
-            └── example
-                └── helloworld
-                    └── AppTest.class
+The main folders and files:
+
+- `src/main/java` — your main Java source code
+- `src/test/java` — your test code
+- `pom.xml` — Maven project configuration
+- `README.md` — this file
+- `CONFIG.md` — explains the Maven configuration
+- `dist/` — created when you package the project (`mvn package`); contains the built `.jar` file and Javadoc `.jar`.
+- `docs/` — created when you generate Javadoc (`mvn javadoc:javadoc` or `mvn package`); contains HTML API documentation in `docs/apidocs/`.
+
+> The `dist/` and `docs/` folders are generated automatically by Maven. You do not need to create them manually.
+
 
 ## 🚀 Getting Started
 
@@ -41,21 +27,29 @@ This is a simple Maven-based Java project designed for use as a GitHub Classroom
 
 - Java JDK 21
 - Apache Maven
-- Visual Studio Code
-  - Java Extension Pack
-  - Maven for Java
+- Visual Studio Code (recommended)
 
-### Build the Project
+### Common Commands
 
-```bash
-mvn compile
-```
+- Build the project:
 
-### Run the Application
+  ```sh
+  mvn compile
+  ```
 
-```bash
-mvn exec:java -Dexec.mainClass="edu.pstcc.chnelson.helloworld.App"
-```
+- Run the application:
+
+  ```sh
+  mvn exec:java
+  ```
+
+- Run tests:
+
+  ```sh
+  mvn test
+  ```
+
+For details on how the project is configured, see [CONFIG.md](CONFIG.md).
 
 ### Run Tests
 
@@ -71,77 +65,20 @@ mvn javadoc:javadoc
 
 The documentation will be generated in target/site/apidocs.
 
-### VS Code Setup
+### Generate JAR Packages
 
-Recommended extensions:
-
-```json
-{
-  "recommendations": [
-    "vscjava.vscode-java-pack",
-    "vscjava.vscode-maven"
-  ]
-}
-```
-
-Place this in .vscode/extensions.json to help students install the right tools.
-
-### License
-
-This project is intended for educational use.
-
-### `.gitignore`
-
-```gitignore
-# Maven target directory
-target/
-
-# Logs
-*.log
-
-# Compiled class files
-*.class
-
-# VS Code settings
-.vscode/
-
-# IDE files
-*.iml
-.idea/
-*.ipr
-*.iws
-
-# OS-specific files
-.DS_Store
-Thumbs.db
-```
-## Running with Maven
-
-To avoid having to specify the main class entry point each time, configure Maven's pom.xml and set the entrypoint for the exec plugin by adding this to the plugins section.
-
-```xml
-<plugin>
-  <groupId>org.codehaus.mojo</groupId>
-  <artifactId>exec-maven-plugin</artifactId>
-  <version>3.2.0</version> <!-- Check for the latest stable version if needed -->
-  <configuration>
-    <!-- 
-      SET YOUR FULLY QUALIFIED MAIN CLASS HERE 
-      (e.g., edu.pstcc.citc.App or com.example.DataViewer) 
-    -->
-    <mainClass>edu.pstcc.citc.App</mainClass>
-  </configuration>
-</plugin>
-```
-
-Otherwise, you will have to specify it each time you execute the application with maven like this.
-
-```sh
-mvn exec:java -Dexec.mainClass="edu.pstcc.citc.App"
+```bash
+mvn package
 ```
 
 ## Running directly with java
 
+To bypass Maven and run the compiled application directly on the JRE, use this command.
+
 ```sh
 java -cp target/classes edu.pstcc.citc.App
 ```
+
+### License
+
+This project is intended for educational use.

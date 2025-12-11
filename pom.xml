@@ -67,12 +67,8 @@
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>exec-maven-plugin</artifactId>
-        <version>3.2.0</version> <!-- Check for the latest stable version if needed -->
+        <version>3.2.0</version>
         <configuration>
-          <!-- 
-            SET YOUR FULLY QUALIFIED MAIN CLASS HERE 
-            (e.g., edu.pstcc.citc.App or com.example.DataViewer) 
-          -->
           <mainClass>edu.pstcc.citc.App</mainClass>
         </configuration>
       </plugin>
